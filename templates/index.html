@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Log</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="flex justify-center relative">
+
+  <main class="h-screen lg:w-[60%] w-full border p-4 relative">
+    <h1 class="text-xl font-bold">Chat Log(Beta)</h1>
+    <div id="chat-log" class="chat-log border h-[80%] w-full">  
+    </div>
+    <div class="w-full flex items-center gap-4 absolute bottom-8 left-0 right-0">
+      <input class="w-[80%] border rounded-full px-6 py-3" type="text" id="message-input" placeholder="message" />
+      <button class="w-[20%] bg-black border-full p-3 text-white rounded-full" id="send-button">Send</button>
+    </div>
+
+  </main>
+
+
+
+
+
+  <script>
+    const chatLogElement = document.getElementById("chat-log");
+    const messageInputElement = document.getElementById("message-input");
+    const sendButtonElement = document.getElementById("send-button");
+
+    let log = [
+   
+
+    ];
+
+    const prompt = [{
+      role: "user",
+      content: "roleplay like a 21 year old muslim asian girl named Fathima, studying computer science, the response should be short and more human"
+    }]
+
+    // Function to render chat log to the screen
+    function renderChatLog() {
+      chatLogElement.innerHTML = ''; // Clear the previous entries
+      log.forEach((entry, index) => {
+        const li = document.createElement("div");
+        if (entry.role == "user")
+        {
+          li.innerHTML = `<div class="w-full flex justify-end p-4  text-black"><p class=" w-[50%] bg-blue-100 rounded-lg p-4 text-base">${entry.content}</p></div>`;
+        }
+        else{
+          li.innerHTML = `<div class="w-full flex justify-start p-4  text-black"><p class="w-full bg-gray-100 rounded-lg p-4 text-base">${entry.content}</p></div>`;
+        }
+        chatLogElement.appendChild(li);
+      });
+    }
+
+    // Function to send data to the Flask API
+    async function sendData(data) {
+      const url = 'http://127.0.0.1:5000/gen'; // Your Flask API endpoint
+
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data) // Send the log array as JSON
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          log.push(result); // Append the new result to the log
+          renderChatLog(); // Re-render the chat log
+        } else {
+          console.error('Error:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    // Send button click event
+    sendButtonElement.addEventListener("click", () => {
+      const newMessage = messageInputElement.value;
+      if (newMessage) {
+        log.push({
+          role: "user",
+          content: newMessage
+        }); // Add the user's message to the log
+        renderChatLog(); // Re-render the chat log
+        messageInputElement.value = ''; // Clear the input field
+
+        // Send the updated log to the server
+        sendData(log);
+      }
+    });
+
+    // Initial render of chat log
+    sendData(prompt)
+    renderChatLog();
+  </script>
+
+</body>
+
+</html>
