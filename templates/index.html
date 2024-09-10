@@ -1,24 +1,32 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Chat Log</title>
+  <title>ChatKaroo | Talk to a Virtual Characters</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
 </head>
 
-<body class="flex justify-center relative">
+<body class="flex justify-center relative font-poppins">
 
-  <main class="h-screen lg:w-[60%] w-full border p-4 relative">
-    <h1 class="text-xl font-bold">Chat Log(Beta)</h1>
-    <div id="chat-log" class="chat-log border h-[80%] w-full">  
+  <main class="h-screen lg:w-[60%] w-full p-4 relative">
+    <h1 class="text-xl font-bold p-4">ChatKaroo (Beta)</h1>
+    <div id="chat-log" class="chat-log overflow-y-scroll h-[80%] w-full ">
     </div>
-    <div class="w-full flex items-center gap-4 absolute bottom-8 left-0 right-0">
-      <input class="w-[80%] border rounded-full px-6 py-3" type="text" id="message-input" placeholder="message" />
-      <button class="w-[20%] bg-black border-full p-3 text-white rounded-full" id="send-button">Send</button>
+    <div class="w-full flex justify-center items-center  ">
+      <div class="flex w-[88%] border rounded-full bg-gray-100 overflow-hidden shadow-sm">
+        <input type="text" id="message-input" placeholder="Message" class="w-[70%] lg:w-[80%] px-6 py-3 bg-gray-100 focus:outline-none ">
+        <button id="send-button" class="w-[30%] lg:w-[20%] flex justify-end px-4 items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-10 w-10 bi bi-arrow-right-circle-fill"
+          viewBox="0 0 16 16">
+          <path
+            d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z" />
+        </svg>
+          </button>
+      </div>
     </div>
-
   </main>
 
 
@@ -31,13 +39,28 @@
     const sendButtonElement = document.getElementById("send-button");
 
     let log = [
-   
+
 
     ];
 
+    function typeText(elementId, text, speed) {
+      const element = document.getElementById(elementId);
+      let index = 0;
+
+      function type() {
+        if (index < text.length) {
+          element.textContent += text.charAt(index);
+          index++;
+          setTimeout(type, speed);
+        }
+      }
+
+      type();
+    }
+
     const prompt = [{
       role: "user",
-      content: "roleplay like a 21 year old muslim asian girl named Fathima, studying computer science, the response should be short and more human"
+      content: "The response should be short in length and should sound more human, You are Jungkook, the charismatic and talented vocalist of BTS. As a 26-year-old Korean artist known for your energetic performances, warm personality, and passion for music, you engage with fans and friends with enthusiasm and kindness. You’re deeply committed to your craft, whether you're singing, dancing, or interacting with your fans,Energetic: Always full of energy and positivity.Passionate: Deeply loves music and performing, always striving to improve.Kind: Friendly and caring towards fans and people around you.Humorous: Has a playful side and enjoys making people laugh.Down-to-Earth: Despite your fame, you remain humble and approachable.Occupation: Singer, dancer, and performer with BTS.Hobbies: Enjoys playing video games, traveling, and trying out new foods.Interests: Interested in fitness, fashion, and photography."
     }]
 
     // Function to render chat log to the screen
@@ -45,14 +68,14 @@
       chatLogElement.innerHTML = ''; // Clear the previous entries
       log.forEach((entry, index) => {
         const li = document.createElement("div");
-        if (entry.role == "user")
-        {
-          li.innerHTML = `<div class="w-full flex justify-end p-4  text-black"><p class=" w-[50%] bg-blue-100 rounded-lg p-4 text-base">${entry.content}</p></div>`;
+        if (entry.role == "user") {
+          li.innerHTML = `<div class="w-full flex justify-end p-4  text-black"><p class=" w-[60%] bg-blue-100 rounded-lg p-4 text-base">${entry.content}</p></div>`;
         }
-        else{
-          li.innerHTML = `<div class="w-full flex justify-start p-4  text-black"><p class="w-full bg-gray-100 rounded-lg p-4 text-base">${entry.content}</p></div>`;
+        else {
+          li.innerHTML = `<div class="w-full flex justify-start p-4  text-black"><img src="/static/jk.jpg" alt="jk" class="h-8 w-8 rounded-full mx-4 object-cover"><p class="w-full bg-gray-100 rounded-lg p-4 text-base">${entry.content}</p></div>`;
         }
         chatLogElement.appendChild(li);
+        chatLogElement.scrollTop = chatLogElement.scrollHeight;
       });
     }
 
