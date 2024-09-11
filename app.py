@@ -12,11 +12,40 @@ client = Groq(
     api_key=os.getenv("GROQ_API"),
 )
 
+
+
 app = Flask(__name__)
+
+with open('characters.json', 'r') as file:
+    charaters = json.load(file)
 
 @app.route("/")
 def index():
-    return render_template('index.html')
+    return render_template('index.html', charaters = charaters)
+
+@app.route("/custom", methods=["POST"])
+def custom():
+    name = request.form.get("name")
+    content = request.form.get("content")        
+    return render_template('chat.html',name=name, role="user", content=content)
+
+@app.route("/c/<character>")
+def chat(character):
+    if any(char["id"].lower() == character.lower() for char in charaters):
+      for char in charaters:
+        if char["id"] == character:
+            name = char["name"]
+            role = char["role"]
+            content = char["content"]
+            img = char["img"]
+
+            break
+      return render_template('chat.html',name=name, role=role, content=content, img=img)
+        
+
+    else:
+        return "something Went Wrong!"
+
 
 @app.route('/gen', methods=["POST"])
 def generate():

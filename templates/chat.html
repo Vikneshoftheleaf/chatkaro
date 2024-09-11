@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{name}}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+
+<body class="flex justify-center relative font-poppins">
+  <p class="hidden">{{content}}</p>
+  <main class="h-screen lg:w-[60%] w-full p-4 relative">
+    <div class="p-4 flex gap-2 items-center">
+      <h1 class="text-xl font-bold p-4">ChatKaroo (Beta)</h1> 
+      <span id="status"></span>
+    </div>
+    <div id="chat-log" class="chat-log overflow-y-scroll lg:h-[70%] h-[75%] w-full ">
+    </div>
+    <div class="w-full flex justify-center items-center  ">
+      <div class="flex w-[88%] border rounded-md bg-gray-100 overflow-hidden shadow-sm">
+        <textarea  id="message-input" placeholder="Message"
+          class="resize-none w-[70%] lg:w-[80%] px-6 py-3 bg-gray-100 focus:outline-none" ></textarea>
+        <button id="send-button" class="w-[30%] lg:w-[20%] flex justify-end px-4 items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-10 w-10 bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
+            <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0"/>
+          </svg>        </button>
+      </div>
+    </div>
+  </main>
+
+
+
+
+
+  <script>
+    const chatLogElement = document.getElementById("chat-log");
+    const messageInputElement = document.getElementById("message-input");
+    const sendButtonElement = document.getElementById("send-button");
+    const status = document.getElementById("status");
+    const inrole = "{{role}}"
+    const incontent = "{{content}}"
+    const inimg = "{{img}}"
+    const inname = "{{name}}"
+
+
+
+
+    let log = [
+
+
+    ];
+
+    const prompt = [
+      {
+        "role": inrole,
+        "content": `You are not an AI chatbot. You are a character in a role-playing scenario. Embrace your role as ${incontent}, Respond to situations as this character would, considering their background, personality, and goals. Avoid any references to being an AI or chatbot, and instead focus on staying true to your role in the story`
+      }
+    
+    ]
+
+    function typeText(elementId, text, speed) {
+      const element = document.getElementById(elementId);
+      let index = 0;
+
+      function type() {
+        if (index < text.length) {
+          element.textContent += text.charAt(index);
+          index++;
+          setTimeout(type, speed);
+        }
+      }
+
+      type();
+    }
+
+
+    // Function to render chat log to the screen
+    function renderChatLog() {
+      chatLogElement.innerHTML = ''; // Clear the previous entries
+      log.forEach((entry, index) => {
+        const li = document.createElement("div");
+        if (entry.role == "user") {
+
+          li.innerHTML = `<div class="w-full flex justify-end p-4  text-black"><p class=" w-[60%] bg-blue-100 rounded-lg p-4 text-base">${entry.content}</p></div>`;
+        }
+        else {
+
+          li.innerHTML = `<div class="w-full flex flex-col gap-2 justify-start p-4  text-black"><div class="flex  items-center"><img src="/static/${(inimg?inimg:"user-avater.jpg")}" alt="${inname}" class="h-8 w-8 rounded-full mx-4 object-cover"><p class="text-sm font-bold">${inname}</p></div><p class="ml-4 w-[80%] bg-gray-100 rounded-lg p-4 text-base">${entry.content}</p></div>`;
+        }
+        chatLogElement.appendChild(li);
+        chatLogElement.scrollTop = chatLogElement.scrollHeight;
+      });
+    }
+
+    // Function to send data to the Flask API
+    async function sendData(data) {
+      status.innerHTML = '<p class="px-4 py-2 bg-blue-100 text-blue-950 rounded-md font-semibold text-sm"> Loading</p>'
+      const url = 'https://chatkaroo.vercel.app/gen'; 
+
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data) // Send the log array as JSON
+        });
+
+        if (response.ok) {
+          const result = await response.json();
+          log.push(result); // Append the new result to the log
+          renderChatLog(); // Re-render the chat log
+          status.textContent = ""
+
+        } else {
+          console.error('Error:', response.statusText);
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    // Send button click event
+    sendButtonElement.addEventListener("click", () => {
+      const newMessage = messageInputElement.value;
+      if (newMessage) {
+        log.push({
+          role: "user",
+          content: newMessage
+        }); // Add the user's message to the log
+        renderChatLog(); // Re-render the chat log
+        messageInputElement.value = ''; // Clear the input field
+
+        // Send the updated log to the server
+
+        sendData(log);
+      }
+    });
+
+    messageInputElement.addEventListener("keypress", function(event) {
+    // Check if the key pressed is Enter (key code 13)
+    if (event.key === "Enter") {
+        // Prevent the default action of Enter key (if needed, e.g., form submission)
+        event.preventDefault();
+
+        // Trigger the button click
+        sendButtonElement.click();
+    }
+});
+
+    // Initial render of chat log
+    sendData(prompt)
+    renderChatLog();
+  </script>
+
+</body>
+
+</html>
