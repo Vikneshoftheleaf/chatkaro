@@ -16,7 +16,7 @@ client = Groq(
 
 app = Flask(__name__)
 
-with open('characters.json', 'r') as file:
+with open('static/characters.json', 'r') as file:
     charaters = json.load(file)
 
 @app.route("/")
