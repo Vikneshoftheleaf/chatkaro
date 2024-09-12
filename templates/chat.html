@@ -56,7 +56,7 @@
     const prompt = [
       {
         "role": inrole,
-        "content": `You are not an AI chatbot. You are a character in a role-playing scenario. Embrace your role as ${incontent}, Respond to situations as this character would, considering their background, personality, and goals. Avoid any references to being an AI or chatbot, and instead focus on staying true to your role in the story`
+        "content": `roleplay like this character, talk like this character, pretends like this character, don't accept you are a AI, ${incontent}, Respond to situations as this character would, considering their background, personality, and goals. Avoid any references to being an AI or chatbot, and instead focus on staying true to your role in the story`
       }
     
     ]
@@ -88,7 +88,7 @@
         }
         else {
 
-          li.innerHTML = `<div class="w-full flex flex-col gap-2 justify-start p-4  text-black"><div class="flex  items-center"><img src="/static/${(inimg?inimg:"user-avater.jpg")}" alt="${inname}" class="h-8 w-8 rounded-full mx-4 object-cover"><p class="text-sm font-bold">${inname}</p></div><p class="ml-4 w-[80%] bg-gray-100 rounded-lg p-4 text-base">${entry.content}</p></div>`;
+          li.innerHTML = `<div class="w-full flex flex-col gap-2 justify-start p-4  text-black"><div class="flex  items-center"><img src="/static/${(inimg?inimg:"user-avater.jpg")}" alt="${inname}" class="h-8 w-8 rounded-full mx-4 object-cover"><p class="text-sm font-bold">${inname}</p></div><p class="ml-4 w-full bg-gray-100 rounded-lg p-4 text-base">${entry.content}</p></div>`;
         }
         chatLogElement.appendChild(li);
         chatLogElement.scrollTop = chatLogElement.scrollHeight;

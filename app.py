@@ -56,7 +56,8 @@ def generate():
         # Generate chat completion
         chat_completion = client.chat.completions.create(
             messages=messages,
-            model="llama3-70b-8192"
+            model="llama3-70b-8192",
+            
         )
 
         # Extract response content
