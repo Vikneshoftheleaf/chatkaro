@@ -12,8 +12,6 @@ client = Groq(
     api_key=os.getenv("GROQ_API"),
 )
 
-
-
 app = Flask(__name__)
 
 with open('static/characters.json', 'r') as file:
