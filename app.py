@@ -35,12 +35,11 @@ def chat(character):
       for char in charaters:
         if char["id"] == character:
             name = char["name"]
-            role = char["role"]
             content = char["content"]
             img = char["img"]
 
             break
-      return render_template('chat.html',name=name, role=role, content=content, img=img)
+      return render_template('chat.html',name=name, content=content, img=img)
         
 
     else:
@@ -55,11 +54,13 @@ def generate():
 
         # Generate chat completion
         chat_completion = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
             messages=messages,
-            model="llama3-70b-8192",
+            
             
         )
 
+        
         # Extract response content
         response = chat_completion.choices[0].message.content
 
@@ -68,6 +69,7 @@ def generate():
             "role": "assistant",
             "content": response
         }
+
 
         # Send response back to client
         return jsonify(data)
