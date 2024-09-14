@@ -65,14 +65,14 @@
         const li = document.createElement("div");
         if (entry.role == "user") {
 
-          li.innerHTML = `<div class="w-full flex justify-end  text-black"><p class=" w-[60%] bg-blue-100 rounded-lg p-4 text-sm">${entry.content}</p></div>`;
+          li.innerHTML = `<div class="w-full flex justify-end  text-black"><p class=" w-[60%] bg-blue-100 rounded-lg p-4 text-base">${entry.content}</p></div>`;
         }
         else if(entry.role =="system"){
           return null
         }
         else {
 
-          li.innerHTML = `<div class="w-full flex flex-col gap-2 justify-start  text-black"><div class="flex  items-center"><img src="/static/${(inimg?inimg:"user-avater.jpg")}" alt="${inname}" class="h-8 w-8 rounded-full mx-4 object-cover"><p class="text-sm font-bold">${inname}</p></div><p class="w-[98%] bg-gry-100 rounded-lg p-4 text-sm">${entry.content}</p></div>`;
+          li.innerHTML = `<div class="w-full flex flex-col gap-2 justify-start  text-black"><div class="flex  items-center"><img src="/static/${(inimg?inimg:"user-avater.jpg")}" alt="${inname}" class="h-8 w-8 rounded-full mx-4 object-cover"><p class="text-base font-bold">${inname}</p></div><p class="w-[98%] bg-gry-100 rounded-lg p-4 text-sm">${entry.content}</p></div>`;
         }
         chatLogElement.appendChild(li);
         chatLogElement.scrollTop = chatLogElement.scrollHeight;
