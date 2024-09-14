@@ -13,19 +13,23 @@
 <body class="flex justify-center relative font-[poppins]">
   <main class="h-screen lg:w-[60%] w-full relative p-4">
     <div class="flex gap-2 items-center">
-      <h1 class="text-xl font-bold p-4">ChatKaroo (Beta)</h1> 
+      <h1 class="text-xl font-bold p-4">ChatKaroo (Beta)</h1>
       <span id="status"></span>
     </div>
-    <div id="chat-log" class="chat-log overflow-y-scroll lg:h-[70%] h-[75%] w-full ">
+    
+    <div id="chat-log" class="chat-log overflow-y-scroll lg:h-[70%] h-[80%] w-full flex flex-col gap-4">
     </div>
-    <div class="w-full flex justify-center items-center  ">
-      <div class="flex w-[88%] border rounded-md bg-gray-100 overflow-hidden shadow-sm">
-        <textarea rows="1"  id="message-input" placeholder="Message"
-          class="resize-none w-[70%] lg:w-[80%] px-6 py-3 bg-gray-100 focus:outline-none" ></textarea>
+
+
+    <div class="w-full flex justify-center items-center fixed bottom-8 left-0 z-10 ">
+      <div class="flex lg:w-[60%] w-[88%] px-4 border rounded-md bg-gray-100 overflow-hidden shadow-sm ">
+        <textarea rows="1" id="message-input" placeholder="Message" class="resize-none w-[70%] lg:w-[80%] px-6 py-3 bg-gray-100 focus:outline-none"></textarea>
         <button id="send-button" class="w-[30%] lg:w-[20%] flex justify-end px-4 items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-8 w-8 bi bi-arrow-up-square-fill" viewBox="0 0 16 16">
-            <path d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0"/>
-          </svg>        </button>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-8 w-8 bi bi-arrow-up-square-fill"
+            viewBox="0 0 16 16">
+            <path
+              d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0" />
+          </svg> </button>
       </div>
     </div>
   </main>
@@ -53,10 +57,28 @@
         "role": "system",
         "content": `roleplay to this character and situation, if there is no situation then create a random situation, the response should be short but not long, do not admit you are a AI or anything related to AI, just act as a real person, do not talk to your self, ${incontent}`
       }
-    
+
     ]
 
 
+    function revert(index)
+    {
+      
+        log.pop()
+        sendData(log)     
+
+      /*if (log.length == 2)
+      {
+        console.log(log.length)
+        log.pop()
+        sendData(log)
+      }
+      else{
+        console.log(log.length)
+
+        sendData(log)
+      }*/
+    }
 
     // Function to render chat log to the screen
     function renderChatLog() {
@@ -65,14 +87,19 @@
         const li = document.createElement("div");
         if (entry.role == "user") {
 
-          li.innerHTML = `<div class="w-full flex justify-end  text-black"><p class=" w-[60%] bg-blue-100 rounded-lg p-4 text-base">${entry.content}</p></div>`;
+          li.innerHTML = `<div class="w-full flex justify-end text-black"><p class=" w-[60%] bg-blue-100 rounded-lg p-4 text-base">${entry.content}</p></div>`;
         }
-        else if(entry.role =="system"){
+        else if (entry.role == "system") {
           return null
         }
         else {
 
-          li.innerHTML = `<div class="w-full flex flex-col gap-2 justify-start  text-black"><div class="flex  items-center"><img src="/static/${(inimg?inimg:"user-avater.jpg")}" alt="${inname}" class="h-8 w-8 rounded-full mx-4 object-cover"><p class="text-sm font-bold">${inname}</p></div><p class="w-[98%] bg-gry-100 rounded-lg p-4 text-base">${entry.content}</p></div>`;
+          li.innerHTML = `<div class="w-full flex flex-col gap-2 justify-start text-black"><div class="flex  items-center"><img src="/static/${(inimg ? inimg : "user-avater.jpg")}" alt="${inname}" class="h-8 w-8 rounded-full mx-4 object-cover"><p class="text-sm font-bold">${inname}</p></div><p class="w-[98%] bg-gry-100 rounded-lg p-4 text-base">${entry.content}</p><div class=" ${(index == (log.length -1))?null:"hidden"} px-4 py-2 w-auto rounded-md flex gap-4"><button onclick="revert()"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-4 w-4 bi bi-arrow-clockwise" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
+  <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
+</svg></button><button class="hidden" onclick="edit()"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-4 w-4 bi bi-pen" viewBox="0 0 16 16">
+  <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
+</svg></button></div></div>`;
         }
         chatLogElement.appendChild(li);
         chatLogElement.scrollTop = chatLogElement.scrollHeight;
@@ -82,7 +109,7 @@
     // Function to send data to the Flask API
     async function sendData(data) {
       status.innerHTML = '<p class="px-4 py-2 bg-blue-100 text-blue-950 rounded-md font-semibold text-sm"> Loading</p>'
-      const url = 'https://chatkaroo.vercel.app/gen'; 
+      const url = 'http://127.0.0.1:5000/gen';
 
       try {
         const response = await fetch(url, {
@@ -96,7 +123,6 @@
         if (response.ok) {
           const result = await response.json();
           log.push(result); // Append the new resucd lt to the log
-          console.log(log)
           renderChatLog(); // Re-render the chat log
           status.textContent = ""
 
@@ -125,16 +151,16 @@
       }
     });
 
-    messageInputElement.addEventListener("keypress", function(event) {
-    // Check if the key pressed is Enter (key code 13)
-    if (event.key === "Enter") {
+    messageInputElement.addEventListener("keypress", function (event) {
+      // Check if the key pressed is Enter (key code 13)
+      if (event.key === "Enter") {
         // Prevent the default action of Enter key (if needed, e.g., form submission)
         event.preventDefault();
 
         // Trigger the button click
         sendButtonElement.click();
-    }
-});
+      }
+    });
 
     // Initial render of chat log
     sendData(log)
