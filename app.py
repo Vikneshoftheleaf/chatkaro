@@ -9,7 +9,7 @@ load_dotenv()
 
 # Initialize Groq client
 client = Groq(
-    api_key=os.getenv("GROQ_API"),
+    api_key=os.getenv("GROQ_API")
 )
 
 app = Flask(__name__)
