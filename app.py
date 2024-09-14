@@ -1,5 +1,5 @@
 import os
-from dotenv import load_dotenv
+from dotenv.main import load_dotenv
 from flask import Flask, request, jsonify, render_template
 from groq import Groq
 import json
@@ -9,7 +9,7 @@ load_dotenv()
 
 # Initialize Groq client
 client = Groq(
-    api_key=os.getenv("GROQ_API"),
+    api_key=os.getenv("GROQ_API")
 )
 
 app = Flask(__name__)
