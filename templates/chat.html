@@ -1,20 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en" class="">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{name}}</title>
+  <script defer src="../static/script.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
-<body class="flex justify-center relative font-[poppins]">
+<body class="flex justify-center relative font-[raleway] dark:bg-gray-900 dark:text-slate-50">
   <main class="h-screen lg:w-[60%] w-full relative p-4">
     <div class="flex gap-2 items-center">
-      <h1 class="text-xl font-bold p-4">ChatKaroo (Beta)</h1>
+      <a href="/" class ="text-xl font-bold p-4">ChatKaroo (Beta)</a>
       <span id="status"></span>
+      <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-200 hover:dark:bg-blue-500 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm px-2 py-1 bg-gray-100 dark:bg-gray-700">
+        <i id="theme-toggle-dark-icon" class="text-xl hidden w-5 h-5 bi bi-brightness-high-fill"></i>
+        <i id="theme-toggle-light-icon" class="text-xl hidden w-5 h-5 bi bi-moon-fill"></i>
+    </button>
     </div>
     
     <div id="chat-log" class="chat-log overflow-y-scroll lg:h-[70%] h-[80%] w-full flex flex-col gap-4">
@@ -22,14 +26,12 @@
 
 
     <div class="w-full flex justify-center items-center fixed bottom-8 left-0 z-10 ">
-      <div class="flex lg:w-[60%] w-[88%] px-4 border rounded-md bg-gray-100 overflow-hidden shadow-sm ">
-        <textarea rows="1" id="message-input" placeholder="Message" class="resize-none w-[70%] lg:w-[80%] px-6 py-3 bg-gray-100 focus:outline-none"></textarea>
+      <div class="flex lg:w-[60%] w-[88%] px-4 dark:border-none border rounded-md dark:bg-gray-700 bg-gray-100 overflow-hidden shadow-sm items-center">
+        <i class="text-3xl dark:text-gray-300 text-gray-600 bi bi-person-circle"></i>
+        <textarea rows="1" id="message-input" placeholder="Message" class="resize-none w-[70%] lg:w-[80%] px-6 py-3 dark:bg-gray-700 bg-gray-100 focus:outline-none"></textarea>
         <button id="send-button" class="w-[30%] lg:w-[20%] flex justify-end px-4 items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-8 w-8 bi bi-arrow-up-square-fill"
-            viewBox="0 0 16 16">
-            <path
-              d="M2 16a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2zm6.5-4.5V5.707l2.146 2.147a.5.5 0 0 0 .708-.708l-3-3a.5.5 0 0 0-.708 0l-3 3a.5.5 0 1 0 .708.708L7.5 5.707V11.5a.5.5 0 0 0 1 0" />
-          </svg> </button>
+          <i class="text-3xl text-blue-500 float-right aspect-square bi bi-arrow-up-square-fill"></i>
+        </button>
       </div>
     </div>
   </main>
@@ -67,18 +69,8 @@
         log.pop()
         sendData(log)     
 
-      /*if (log.length == 2)
-      {
-        console.log(log.length)
-        log.pop()
-        sendData(log)
-      }
-      else{
-        console.log(log.length)
-
-        sendData(log)
-      }*/
     }
+
 
     // Function to render chat log to the screen
     function renderChatLog() {
@@ -87,29 +79,27 @@
         const li = document.createElement("div");
         if (entry.role == "user") {
 
-          li.innerHTML = `<div class="w-full flex justify-end text-black"><p class=" w-[60%] bg-blue-100 rounded-lg p-4 text-base">${entry.content}</p></div>`;
+          li.innerHTML = `<div class="w-full flex justify-end text-black"><p class=" w-[60%] dark:bg-gray-700 dark:text-gray-300 bg-blue-100 rounded-lg p-4 text-base font-[500]">${entry.content}</p></div>`;
         }
         else if (entry.role == "system") {
           return null
         }
         else {
 
-          li.innerHTML = `<div class="w-full flex flex-col gap-2 justify-start text-black"><div class="flex  items-center"><img src="/static/${(inimg ? inimg : "user-avater.jpg")}" alt="${inname}" class="h-8 w-8 rounded-full mx-4 object-cover"><p class="text-sm font-bold">${inname}</p></div><p class="w-[98%] bg-gry-100 rounded-lg p-4 text-base">${entry.content}</p><div class=" ${(index == (log.length -1))?null:"hidden"} px-4 py-2 w-auto rounded-md flex gap-4"><button onclick="revert()"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-4 w-4 bi bi-arrow-clockwise" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2z"/>
-  <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466"/>
-</svg></button><button class="hidden" onclick="edit()"><svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-4 w-4 bi bi-pen" viewBox="0 0 16 16">
-  <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
-</svg></button></div></div>`;
+          li.innerHTML = `<div class="w-full flex flex-col gap-2 justify-start "><div class="flex  items-center"><img src="/static/${(inimg ? inimg : "user-avater.jpg")}" alt="${inname}" class="h-8 w-8 rounded-full mx-4 object-cover"><p class="text-sm font-bold">${inname}</p></div><p class="w-[98%] bg-gry-100 rounded-lg p-4 text-[16px] font-[500] dark:text-gray-300 bg-gray-100 dark:bg-gray-800 dark:text-gray-200 text-gray-600">${entry.content}</p><div class=" ${(index == (log.length -1))?null:"hidden"} px-4 py-2 w-auto rounded-md flex gap-4"><button class="px-2 py-1 rounded-md dark:bg-gray-700 bg-gray-100 hover:dark:bg-blue-500 hover:bg-blue-100" onclick="revert()"><i class="bi bi-arrow-repeat"></i>
+  </button></div></div>`;
         }
         chatLogElement.appendChild(li);
         chatLogElement.scrollTop = chatLogElement.scrollHeight;
       });
     }
 
+    
+
     // Function to send data to the Flask API
     async function sendData(data) {
-      status.innerHTML = '<p class="px-4 py-2 bg-blue-100 text-blue-950 rounded-md font-semibold text-sm"> Loading</p>'
-      const url = 'https://chatkaroo.vercel.app/gen';
+      status.innerHTML = '<div class="z-10 fixed lg:left-[21%] left-[10%] bottom-28" role="status"><svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/><path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/></svg><span class="sr-only">Loading...</span></div>'
+      const url = 'http://127.0.0.1:5000/gen';
 
       try {
         const response = await fetch(url, {

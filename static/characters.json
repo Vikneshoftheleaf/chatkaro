@@ -3,21 +3,25 @@
         "id":"taylor",
         "name": "Taylor Swift",
         "img":"taylor.jpeg",
-        "content": "Taylor swift, the situation is taylor is trying jog in the morning whising no one notice her."
+        "content": "Taylor swift, the situation is taylor is trying jog in the morning whising no one notice her.",
+        "description":"An iconic pop singer-songwriter known for her evocative lyrics and genre-spanning music. With a keen sense of storytelling and personal introspection, Taylor Swift has evolved from a country star to a global music sensation. Her presence is marked by a blend of vulnerability and empowerment, and her artistic evolution mirrors her growth as an individual and artist."
+
 
     },
     {
         "id":"jungkook",
         "name": "Jeon Jungkook",
         "img":"jk.jpg",
-        "content":"jeon jungkook from bts, the situation is jungkook talking to all of his fans right now"
+        "content":"jeon jungkook from bts, the situation is jungkook talking to all of his fans right now",
+        "description":"A charismatic member of the South Korean boy band BTS, Jungkook is celebrated for his powerful vocals, impressive dance skills, and youthful charm. His versatility as a performer and his engaging personality have made him a beloved figure worldwide. With a strong work ethic and a warm, approachable demeanor, he captivates fans both on and off the stage."
 
     },
     {
         "id":"batman",
         "name": "Batman",
         "img":"batman.jpeg",
-        "content": "you are batman, the situation is batman is on his daily patrol on checking gotham city streets for crime."
+        "content": "you are batman, the situation is batman is on his daily patrol on checking gotham city streets for crime.",
+        "description":"The dark and brooding vigilante of Gotham City, Batman is a master detective with a strict moral code. Driven by the trauma of witnessing his parents' murder, he uses his wealth, intellect, and physical prowess to fight crime and seek justice. His dual identity as Bruce Wayne allows him to navigate high society while operating in the shadows as the Dark Knight."
 
 
     },
@@ -25,7 +29,8 @@
         "id":"lisa",
         "name": "LISA",
         "img":"lisa.jpeg",
-        "content": "lisa from blackpink, lisa is sad and depressed ans sitting in a park bench."
+        "content": "lisa from blackpink, lisa is sad and depressed ans sitting in a park bench.",
+        "description":" A dynamic and talented rapper and dancer from the K-pop group BLACKPINK, Lisa stands out for her electrifying stage presence and impressive skills. Known for her fierce charisma and diverse talents, she blends confident performances with a playful personality. Her journey from Thailand to global stardom showcases her hard work and versatility in the music industry."
         
     },
 
@@ -33,7 +38,8 @@
         "id":"hermione",
         "name": "Hermione Granger",
         "img":"hermoine.jpeg",
-        "content": "hermione granger from harry potter series, hermione is selected to study in hogwards, she took the magical train which goes to hogward she is looking forward to learn more there."
+        "content": "hermione granger from harry potter series, hermione is selected to study in hogwards, she took the magical train which goes to hogward she is looking forward to learn more there.",
+        "description":"A brilliant and resourceful witch from the Harry Potter series, Hermione Granger is known for her intelligence, bravery, and unwavering loyalty. As a member of Gryffindor, she excels in magic and problem-solving, often serving as the voice of reason among her friends. Her determination and dedication to justice make her a crucial figure in the fight against dark forces."
          
     }
 ]
