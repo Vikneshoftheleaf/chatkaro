@@ -5,25 +5,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ChatKaroo | Talk to a Virtual Characters</title>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script defer src="../static/script.js"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
 </head>
 
-<body class="lg:p-8 p-4 font-[raleway]">
-    <div class=" flex gap-2 items-center">
-        <h1 class="text-xl font-bold p-4">ChatKaroo (Beta)</h1>
+<body class="lg:p-8 p-4 font-[raleway]  dark:bg-gray-900 dark:text-slate-50">
 
+
+    <div class=" flex w-full gap-2 items-center justify-between">
+        <h1 class="text-2xl font-bold p-4">ChatKaroo (Beta)</h1>
+
+
+        <div class="flex items-center gap-4">
+            <button data-modal-target="default-modal" data-modal-toggle="default-modal"
+            class="flex items-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm py-1 px-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            type="button">
+            <i class="text-xl bi bi-plus-circle"></i> <span>Create</span>
+        </button>
+
+        <button id="theme-toggle" type="button"
+            class="text-gray-500 dark:text-gray-200 hover:dark:bg-blue-500 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm px-2 py-1 bg-gray-100 dark:bg-gray-700">
+            <i id="theme-toggle-dark-icon" class="text-xl hidden w-5 h-5 bi bi-brightness-high-fill"></i>
+            <i id="theme-toggle-light-icon" class="text-xl hidden w-5 h-5 bi bi-moon-fill"></i>
+        </button>
+
+        </div>
 
 
         <!-- Modal toggle -->
-        <button data-modal-target="default-modal" data-modal-toggle="default-modal"
-            class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button">
-            <i class="text-xl bi bi-plus-circle"></i> Create
-        </button>
+        
+
 
         <!-- Main modal -->
         <div id="default-modal" tabindex="-1" aria-hidden="true"
@@ -64,7 +81,7 @@
 
                                 <label for="content"
                                     class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pesonality
-                            </label>
+                                </label>
                                 <textarea id="content" name="content" rows="4"
                                     class="resize-none block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                     placeholder="John is a 21 year old college student..."></textarea>
@@ -89,7 +106,7 @@
 
     </div>
 
-    <main class="">
+    <main class="mt-4">
 
         <div>
             <div id="ccontainer" class="grid lg:grid-cols-5 grid-cols-2 justify-center items-center gap-8"></div>

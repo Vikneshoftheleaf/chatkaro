@@ -3,6 +3,7 @@ from dotenv.main import load_dotenv
 from flask import Flask, request, jsonify, render_template
 from groq import Groq
 import json
+import markdown
 
 # Load environment variables
 load_dotenv()
@@ -65,7 +66,7 @@ def generate():
         # Prepare response data
         data = {
             "role": "assistant",
-            "content": response
+            "content": markdown.markdown(response)
         }
 
 

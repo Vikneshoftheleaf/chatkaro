@@ -6,29 +6,36 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{{name}}</title>
   <script defer src="../static/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body class="flex justify-center relative font-[raleway] dark:bg-gray-900 dark:text-slate-50">
   <main class="h-screen lg:w-[60%] w-full relative p-4">
     <div class="flex gap-2 items-center">
-      <a href="/" class ="text-xl font-bold p-4">ChatKaroo (Beta)</a>
+      <a href="/" class="text-xl font-bold p-4">ChatKaroo (Beta)</a>
       <span id="status"></span>
-      <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-200 hover:dark:bg-blue-500 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm px-2 py-1 bg-gray-100 dark:bg-gray-700">
+      <button id="theme-toggle" type="button"
+        class="text-gray-500 dark:text-gray-200 hover:dark:bg-blue-500 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm px-2 py-1 bg-gray-100 dark:bg-gray-700">
         <i id="theme-toggle-dark-icon" class="text-xl hidden w-5 h-5 bi bi-brightness-high-fill"></i>
         <i id="theme-toggle-light-icon" class="text-xl hidden w-5 h-5 bi bi-moon-fill"></i>
-    </button>
+      </button>
     </div>
-    
+
     <div id="chat-log" class="chat-log overflow-y-scroll lg:h-[70%] h-[80%] w-full flex flex-col gap-4">
     </div>
 
 
     <div class="w-full flex justify-center items-center fixed bottom-8 left-0 z-10 ">
-      <div class="flex lg:w-[60%] w-[88%] px-4 dark:border-none border rounded-md dark:bg-gray-700 bg-gray-100 overflow-hidden shadow-sm items-center">
+      <div
+        class="flex lg:w-[60%] w-[88%] px-4 dark:border-none border rounded-md dark:bg-gray-700 bg-gray-100 overflow-hidden shadow-sm items-center">
         <i class="text-3xl dark:text-gray-300 text-gray-600 bi bi-person-circle"></i>
-        <textarea rows="1" id="message-input" placeholder="Message" class="resize-none w-[70%] lg:w-[80%] px-6 py-3 dark:bg-gray-700 bg-gray-100 focus:outline-none"></textarea>
+        <textarea rows="1" id="message-input" placeholder="Message"
+          class="resize-none w-[70%] lg:w-[80%] px-6 py-3 dark:bg-gray-700 bg-gray-100 focus:outline-none"></textarea>
         <button id="send-button" class="w-[30%] lg:w-[20%] flex justify-end px-4 items-center">
           <i class="text-3xl text-blue-500 float-right aspect-square bi bi-arrow-up-square-fill"></i>
         </button>
@@ -57,17 +64,16 @@
     const log = [
       {
         "role": "system",
-        "content": `roleplay to this character and situation, if there is no situation then create a random situation, the response should be short but not long, do not admit you are a AI or anything related to AI, just act as a real person, do not talk to your self, ${incontent}`
+        "content": `roleplay to this character and situation, if there is no situation then create a random situation, the response should be short, the response should be in 2 to 3 lines, the response shoul be less than 50 words, the response must contain line break or spaces between each lines, the response should be in mardown format, the character statements should be in bold, the inner thought and feelings and action should be in italic, do not admit you are a AI or anything related to AI, just act as a real person, do not talk to your self, ${incontent}`
       }
 
     ]
 
 
-    function revert(index)
-    {
-      
-        log.pop()
-        sendData(log)     
+    function revert(index) {
+
+      log.pop()
+      sendData(log)
 
     }
 
@@ -86,7 +92,7 @@
         }
         else {
 
-          li.innerHTML = `<div class="w-full flex flex-col gap-2 justify-start "><div class="flex  items-center"><img src="/static/${(inimg ? inimg : "user-avater.jpg")}" alt="${inname}" class="h-8 w-8 rounded-full mx-4 object-cover"><p class="text-sm font-bold">${inname}</p></div><p class="w-[98%] bg-gry-100 rounded-lg p-4 text-[16px] font-[500] dark:text-gray-300 bg-gray-100 dark:bg-gray-800 dark:text-gray-200 text-gray-600">${entry.content}</p><div class=" ${(index == (log.length -1))?null:"hidden"} px-4 py-2 w-auto rounded-md flex gap-4"><button class="px-2 py-1 rounded-md dark:bg-gray-700 bg-gray-100 hover:dark:bg-blue-500 hover:bg-blue-100" onclick="revert()"><i class="bi bi-arrow-repeat"></i>
+          li.innerHTML = `<div class=" w-full flex flex-col gap-2 justify-start "><div class="flex  items-center"><img src="/static/${(inimg ? inimg : "user-avater.jpg")}" alt="${inname}" class="h-8 w-8 rounded-full mx-4 object-cover"><p class="text-sm font-bold">${inname}</p></div><md class="w-[98%] bg-gry-100 rounded-lg p-4 text-[16px] font-[500] dark:text-gray-300 bg-gray-100 dark:bg-gray-800 dark:text-gray-200 text-gray-600">${entry.content}</md><div class=" ${(index == (log.length - 1)) ? null : "hidden"} px-4 py-2 w-auto rounded-md flex gap-4"><button class="px-2 py-1 rounded-md dark:bg-gray-700 bg-gray-100 hover:dark:bg-blue-500 hover:bg-blue-100" onclick="revert()"><i class="bi bi-arrow-repeat"></i>
   </button></div></div>`;
         }
         chatLogElement.appendChild(li);
@@ -94,7 +100,7 @@
       });
     }
 
-    
+
 
     // Function to send data to the Flask API
     async function sendData(data) {
@@ -156,6 +162,8 @@
     sendData(log)
     renderChatLog();
   </script>
+  <script src="https://cdn.jsdelivr.net/gh/MarketingPipeline/Markdown-Tag/markdown-tag.js"></script> 
+
 
 </body>
 
