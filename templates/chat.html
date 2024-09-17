@@ -182,12 +182,15 @@
           li.innerHTML = `
           <div class="w-full flex flex-col gap-2 items-end text-black relative">
             <p class=" w-[60%] dark:bg-gray-700 dark:text-gray-300 bg-blue-100 rounded-lg p-4 text-base font-[500] text-gray-800">${entry.content}</p>
-            <button class="px-2 py-1 dark:text-gray-300 rounded-md dark:bg-gray-700 bg-gray-100 hover:dark:bg-blue-500 hover:bg-blue-100" onclick="editRes(${index})">
-                  <i class="bi bi-pencil font-bold"></i>
+            <div class=" ${(index == (log.length - 2)) ? null : "hidden"} px-4 py-2 w-auto rounded-md flex gap-4">
+                
+                <button class="px-2 py-1 dark:text-gray-300 rounded-md dark:bg-gray-700 bg-gray-100 hover:dark:bg-blue-500 hover:bg-blue-100" onclick="editRes(${index})">
+                  <i class="bi bi-pencil"></i>
                 </button>
+              </div>
 
-            <div id='edit-${index}' class="hidden absolute z-10 top-0 left-0 right-0 w-full bg-white dark:bg-gray-800 p-2 rounded-lg">
-              <textarea id="editWin-${index}" rows="10" class="focus:ring-4 focus:outline-none focus:ring-blue-500  w-[98%] bg-gry-100 rounded-lg p-4 text-[16px] font-[500] dark:text-gray-300 bg-gray-100 dark:bg-gray-800 dark:text-gray-200 text-gray-800">${entry.content}</textarea>
+            <div id='edit-${index}' class="hidden  absolute z-10 top-0 left-0 right-0 w-full bg-white dark:bg-gray-800 p-4 rounded-lg">
+              <textarea id="editWin-${index}" rows="5" class="border focus:ring-4 focus:outline-none focus:ring-blue-500  w-[98%] bg-gry-100 rounded-lg p-4 text-[16px] font-[500] dark:text-gray-300 bg-gray-100 dark:bg-gray-800 dark:text-gray-200 text-gray-800">${entry.content}</textarea>
               <div class="flex w-full items-center gap-4 py-4">
               <button onclick="updateRes(${index})" type="button"
                 class="px-5 py-2.5 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
@@ -207,8 +210,8 @@
               <img src="/static/${(inimg ? inimg : "user-avater.jpg")}" alt="${inname}" class="h-8 w-8 rounded-full mx-4 object-cover"><p class="text-sm font-bold">${inname}</p>
               <div></div>
             </div>
-            <div id='edit-${index}' class="hidden absolute z-10 top-0 left-0 right-0 w-full bg-white dark:bg-gray-800 p-2 rounded-lg">
-              <textarea id="editWin-${index}" rows="10" class="focus:ring-4 focus:outline-none focus:ring-blue-500  w-[98%] bg-gry-100 rounded-lg p-4 text-[16px] font-[500] dark:text-gray-300 bg-gray-100 dark:bg-gray-800 dark:text-gray-200 text-gray-800">${entry.content}</textarea>
+            <div id='edit-${index}' class="hidden absolute z-10 top-0 left-0 right-0 w-full bg-white dark:bg-gray-800 p-4 rounded-lg">
+              <textarea id="editWin-${index}" rows="5" class="border focus:ring-4 focus:outline-none focus:ring-blue-500  w-[98%] bg-gry-100 rounded-lg p-4 text-[16px] font-[500] dark:text-gray-300 bg-gray-100 dark:bg-gray-800 dark:text-gray-200 text-gray-800">${entry.content}</textarea>
               <div class="flex w-full items-center gap-4 py-4">
               <button onclick="updateRes(${index})" type="button"
                 class="px-5 py-2.5 text-sm font-medium text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
