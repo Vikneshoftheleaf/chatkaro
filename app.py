@@ -13,6 +13,7 @@ client = Groq(
     api_key=os.getenv("GROQ_API")
 )
 
+hostUrl = os.getenv("HOST_URL")
 app = Flask(__name__)
 
 with open('static/characters.json', 'r') as file:
@@ -26,7 +27,7 @@ def index():
 def custom():
     name = request.form.get("name")
     content = request.form.get("content")        
-    return render_template('chat.html',name=name, role="user", content=content)
+    return render_template('chat.html',name=name, role="user", content=content, hostUrl=hostUrl)
 
 @app.route("/c/<character>")
 def chat(character):
@@ -38,7 +39,7 @@ def chat(character):
             img = char["img"]
 
             break
-      return render_template('chat.html',name=name, content=content, img=img)
+      return render_template('chat.html',name=name, content=content, img=img, hostUrl=hostUrl)
         
 
     else:
