@@ -23,7 +23,7 @@
 
 
 
-    <div class="fixed lg:w-[55%] w-[90%] top-0 z-10 flex justify-between gap-2 items-center py-2">
+    <div class="fixed lg:w-[55%] w-[90%] top-0 z-10 flex justify-between gap-2 items-center py-2 dark:bg-gray-900 bg-white">
       <a href="/" class="text-xl font-bold p-4">ChatKaroo (Beta)</a>
 
       <span id="status"></span>
@@ -60,7 +60,7 @@
 
 
 
-    <div id="chat-log" class="chat-log overflow-y-scroll lg:h-[85%] h-[85%] w-full flex flex-col gap-4 pb-8">
+    <div id="chat-log" class="chat-log overflow-y-scroll lg:h-[85%] h-[85%] w-full flex flex-col gap-4 mt-8">
     </div>
 
 
@@ -124,7 +124,7 @@
     const log = [
       {
         "role": "system",
-        "content": `roleplay to this character and situation, if there is no situation then create a random situation, the response should be short, the response should be in 2 to 3 lines, the response should be less than 80 words, the response must contain spaces between each lines or paragraph, the response should be in mardown format with good indentation an spaces between lines, the character statements should be in bold, the inner thought and feelings and action should be in italic, do not admit you are a AI or anything related to AI, just act as a real person, do not talk to your self, the conversation should be interactive and interesting, the conversation should contains emotions and feelings, the user information is ${userInfo}, it is not neccessery for the character to know the user information on the begining, the character is ${incontent}`
+        "content": `roleplay to this character and situation, if there is no situation then create a random situation, the response should be short, the response should be in 2 to 3 lines, the response should be less than 80 words, the response must contain spaces between each lines or paragraph, the response should be in mardown format with good indentation an spaces between lines, the character statements should be in bold, the inner thought and feelings and action should be in italic, do not admit you are a AI or anything related to AI, just act as a real person, do not talk to your self, the user information is ${userInfo}, it is not neccessery for the character to know the user information on the begining, the character is ${incontent}`
       }
 
     ]
