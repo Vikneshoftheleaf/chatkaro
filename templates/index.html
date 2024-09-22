@@ -24,22 +24,22 @@
 
         <div class="flex items-center gap-4">
             <button data-modal-target="default-modal" data-modal-toggle="default-modal"
-            class="flex items-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm py-1 px-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            type="button">
-            <i class="text-xl bi bi-plus-circle"></i> <span>Create</span>
-        </button>
+                class="flex items-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm py-1 px-3 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                type="button">
+                <i class="text-xl bi bi-plus-circle"></i> <span>Create</span>
+            </button>
 
-        <button id="theme-toggle" type="button"
-            class="text-gray-500 dark:text-gray-200 hover:dark:bg-blue-500 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm px-2 py-1 bg-gray-100 dark:bg-gray-700">
-            <i id="theme-toggle-dark-icon" class="text-xl hidden w-5 h-5 bi bi-brightness-high-fill"></i>
-            <i id="theme-toggle-light-icon" class="text-xl hidden w-5 h-5 bi bi-moon-fill"></i>
-        </button>
+            <button id="theme-toggle" type="button"
+                class="text-gray-500 dark:text-gray-200 hover:dark:bg-blue-500 hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm px-2 py-1 bg-gray-100 dark:bg-gray-700">
+                <i id="theme-toggle-dark-icon" class="text-xl hidden w-5 h-5 bi bi-brightness-high-fill"></i>
+                <i id="theme-toggle-light-icon" class="text-xl hidden w-5 h-5 bi bi-moon-fill"></i>
+            </button>
 
         </div>
 
 
         <!-- Modal toggle -->
-        
+
 
 
         <!-- Main modal -->
@@ -67,26 +67,28 @@
                     <!-- Modal body -->
                     <form action="/custom" method="post">
 
-                        <div class="p-4 md:p-5 space-y-4">
-                            <div>
-                                <label for="name"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Character's
-                                    Name
-                                </label>
-                                <input name="name" type="text" id="name"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="John" required />
-                            </div>
-                            <div>
+                        <div class="h-full p-4 overflow-y-auto flex flex-col gap-2 bg-gray-50 dark:bg-gray-800">
+                            <label for="first_name"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                            <input name="name" type="text" id="first_name"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="John" required />
 
-                                <label for="content"
-                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Pesonality
-                                </label>
-                                <textarea id="content" name="content" rows="4"
-                                    class="resize-none block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="John is a 21 year old college student..."></textarea>
+                            <label for="charDescription"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Character's
+                                Description</label>
+                            <textarea name="charDescription" id="charDescription" rows="4"
+                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Write your thoughts here..."></textarea>
 
-                            </div>
+                            <label for="scenario"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Scenario</label>
+                            <textarea name="scenario" id="scenario" rows="4"
+                                class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Write your thoughts here..."></textarea>
+
+
+
                         </div>
                         <!-- Modal footer -->
                         <div
@@ -108,9 +110,35 @@
 
     <main class="mt-4">
 
-        <div>
-            <div id="ccontainer" class="grid lg:grid-cols-5 grid-cols-2 justify-center items-center gap-8"></div>
+        <div class="grid lg:grid-cols-8 grid-cols-1 lg:gap-8 gap-2">
+
+            <div class="col-span-4">
+                <img src="../static/banner2.jpeg" class=" rounded-full" alt="">
+
+            </div>
+
+
+            <div class="col-span-4 flex justify-center items-start flex-col gap-4 p-4">
+
+                <h1 class="lg:text-6xl text-4xl font-black leading-32">Create and Talk to you a Virtual Charcter.</h1>
+
+                <div class="gap-4">
+                    <button data-modal-target="default-modal" data-modal-toggle="default-modal"
+                        class="flex items-center gap-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm py-2 px-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                        type="button">
+                        <span>Let's get Started</span> <i class="text-xl bi bi-arrow-right-circle-fill"></i>
+                    </button>
+
+                </div>
+            </div>
+
+
+
         </div>
+
+
+
+
     </main>
 
     <script>
