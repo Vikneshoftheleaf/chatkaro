@@ -28,8 +28,7 @@ def custom():
     name = request.form.get("name")
     charDescription = request.form.get("charDescription")        
     scenario = request.form.get("scenario") 
-    userDescription = request.form.get("userDescription") 
-    return render_template('chat.html',name=name, role="user",charDescription=charDescription,scenario=scenario ,userDescription=userDescription, hostUrl=hostUrl)
+    return render_template('chat.html',name=name, role="user",charDescription=charDescription,scenario=scenario)
 
 @app.route("/c/<character>")
 def chat(character):
@@ -37,11 +36,12 @@ def chat(character):
       for char in charaters:
         if char["id"] == character:
             name = char["name"]
-            content = char["content"]
             img = char["img"]
+            charDescription = char["charDescription"]
+            scenario = char["scenario"]
 
             break
-      return render_template('chat.html',name=name, content=content, img=img, hostUrl=hostUrl)
+      return render_template('chat.html',name=name, charDescription=charDescription,scenario=scenario, img=img)
         
 
     else:
