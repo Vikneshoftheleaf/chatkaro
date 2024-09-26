@@ -169,9 +169,10 @@
                     personDiv.className = 'person';
 
                     personDiv.innerHTML = `
-                        <a href="/c/${person.id}" class=" rounded-md overflow-hidden relative flex flex-col gap-2  items-center justify-center">
-                        <img src="/static/${person.img}" alt="${person.name}" class=" rounded-md object-cover w-full aspect-square">
-                        <p class=" absolute z-10 left-2 bottom-2 px-4 bg-blue-100 py-2 rounded-full text-blue-950 text-sm font-semibold">${person.name}</p>
+                        <a href="/c/${person.id}" class="dark:border-none border-2 rounded-md relative flex flex-col gap-2 bg-blue-100 dark:shadow-none shadow-lg dark:bg-blue-100/10 backdrop-blur overflow-hidden items-center justify-center">
+                        <img src="/static/${person.img}" alt="${person.name}" class="object-cover w-full aspect-square">
+                        <p class=" absolute z-10 left-2 bottom-16 shadow px-4 bg-blue-100 py-2 rounded-full text-blue-950 text-sm font-semibold">${person.name}</p>
+                        <p class="py-4 text-center text-sm px-2 ">${person.description}</p>
                     </a>
                 `;
 

@@ -37,11 +37,12 @@ def chat(character):
         if char["id"] == character:
             name = char["name"]
             img = char["img"]
+            description = char["description"]
             charDescription = char["charDescription"]
             scenario = char["scenario"]
 
             break
-      return render_template('chat.html',name=name, charDescription=charDescription,scenario=scenario, img=img)
+      return render_template('chat.html',name=name, charDescription=charDescription,scenario=scenario, img=img, description=description)
         
 
     else:
