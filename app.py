@@ -35,6 +35,7 @@ def chat(character):
     if any(char["id"].lower() == character.lower() for char in charaters):
       for char in charaters:
         if char["id"] == character:
+            id = char['id']
             name = char["name"]
             img = char["img"]
             description = char["description"]
@@ -42,7 +43,7 @@ def chat(character):
             scenario = char["scenario"]
 
             break
-      return render_template('chat.html',name=name, charDescription=charDescription,scenario=scenario, img=img, description=description)
+      return render_template('chat.html',id=id, name=name, charDescription=charDescription,scenario=scenario, img=img, description=description)
         
 
     else:
