@@ -41,7 +41,7 @@ with open("chatdata.json", "r") as file:
 # Bot initiates the conversation with a greeting
 chat_completion = client.chat.completions.create(
     messages=messages,
-    model="llama3-70b-8192",
+    model="llama-3.1-70b-versatile",
 )
 
 # Extract and print the bot's initial response
