@@ -60,6 +60,11 @@ def generate():
         chat_completion = client.chat.completions.create(
             model="mistral-saba-24b",
             messages=messages,
+            temperature=1,
+    max_completion_tokens=1024,
+    top_p=1,
+    stream=True,
+    stop=None,
             
         )
 
