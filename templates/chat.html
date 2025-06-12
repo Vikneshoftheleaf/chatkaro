@@ -229,7 +229,7 @@
       chatLogElement.innerHTML = ''; // Clear the previous entries
       log.forEach((entry, index) => {
         const li = document.createElement("div");
-        if (entry.role == "user" && index !=1 && index !=2) {
+        if (entry.role == "user" && index !=1) {
 
           li.innerHTML = `
           <div class="w-full flex flex-col gap-2 items-end text-black relative">
@@ -251,7 +251,7 @@
             </div>
             </div>`;
         }
-        else if (entry.role == "system" || index ==1 || index ==2) {
+        else if (entry.role == "system" || index ==1 ) {
           return null
         }
         else {
